@@ -68,8 +68,8 @@ y_pred = regr.predict(x_test)
 
 
 output = io.open('lin_regression.csv', 'w', encoding='utf-8')
-count = 0
-output.write(u'Id,category\n')
+count = 1
+output.write(u'Id,Label\n')
 for x in np.nditer(y_pred):
     output.write(str(count) + u',' + str(x) + u'\n')
     count += 1
