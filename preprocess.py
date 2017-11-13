@@ -4,9 +4,6 @@ import scipy.misc
 import scipy.signal as md
 import matplotlib.pyplot as plt
 
-x = np.genfromtxt('test_head.csv',delimiter=",")
-x = np.asarray(x, dtype=np.float32)
-x = x.reshape(-1, 64,64)
 
 
 #min of every picture = 0
@@ -26,7 +23,7 @@ def normalize(arr):
 
 #converts everything to a 0 or a 1
 #binary threshold (i haven't tested but one of my friends said use >0.90)
-#said his best results were with 0.96
+#said his best results were with 0.71
 def binarynormalization(arr, threshold):
     arr = arr.astype('float')
 
@@ -37,17 +34,21 @@ def binarynormalization(arr, threshold):
             arr[i,...] -= minval
             arr[i,...] /= (maxval-minval)
 
-
-
-        for x in range(arr.shape[1]):
+        for j in range(arr.shape[1]):
             for y in range(arr.shape[2]):
-                if arr[i,x,y] >= threshold:
-                    arr[i,x,y] = 1.0
+                if arr[i,j,y] >= threshold:
+                    arr[i,j,y] = 1.0
                 else:
-                    arr[i,x,y] = 0.0
+                    arr[i,j,y] = 0.0
+        plt.figure(facecolor="white")
+        plt.axis('off')
+        plt.imshow(arr[i,...],cmap='gray')
+        plt.show
+
     return arr
 
-
+####flips the values of binary normalization
+####all values less than the threshold are turned to a 1, greater than the threshold = 0
 def binaryinversion(arr, threshold):
     arr = arr.astype('float')
 
@@ -64,8 +65,13 @@ def binaryinversion(arr, threshold):
                     arr[i,x,y] = 0.0
                 else:
                     arr[i,x,y] = 1.0
+
     return arr
 
+
+####Adds dilation which changes the pixel of interest based on the surrounding pixels
+####Used in attempt to eliminate some of the back ground noise
+####Best threshold value for binary dilation was 0.81
 def binarywithdilation(arr,threshold):
     for i in range(arr.shape[0]):
         minval = arr[i,...].min()
@@ -80,22 +86,12 @@ def binarywithdilation(arr,threshold):
                     arr[i,j,y] = 1.0
                 else:
                     arr[i,j,y] = 0.0
+        ###dilation taken from the scipy.ndimage
+        img.binary_dilation(arr[i])
 
-        plt.subplot(211)
-        plt.imshow(x[i,...])
-        #md.medfilt(arr[i])
-        plt.subplot(212)
-        plt.imshow(arr[i,...])
-        plt.show()
     return arr
 
-z = np.array(x)
-binarywithdilation(z,0.81)
-
-
-
-
-
+####Same as binary_dilation but flips the values
 def inversedilation(arr, threshold):
     for i in range(arr.shape[0]):
         minval = arr[i,...].min()
