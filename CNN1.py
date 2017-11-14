@@ -228,7 +228,7 @@ def main(unused_argv):
     print(eval_results)
 
     # Load training and eval data
-    x_test_in = open('x_test.pkl','rb')
+    x_test_in = open('x_test_data.pkl','rb')
     #y_in = open('y_train_data.pkl', 'rb')
 
     print('loading picked data...')
