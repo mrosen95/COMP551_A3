@@ -16,18 +16,18 @@ Finally run the following commands to execute the programs
 
   1) Logistic Regression
       
-      python regression.py
+        python regression.py
   
   2) Feedforward Neural Net
   
-      python ff.py
+        python ff.py
   
   3) CNN: 4 conv/pool layers
   
-      python CNN1.py
+        python CNN1.py
    
   4) GoogLeNet
       
-      python gnet.py
+        python gnet.py
       
 Additionally we have included a script with preprocessing options (preproess.py). In all of the above algorithms we include the preprocessing option that generated the best results for us (binary dilation with a 0.7 threshold), but feel free to load any of those from the avaiable package. Note that most of those preprocessing functions require a (-1,64,64) numpy array as input. The pickled files will save all of your data in the correct format for running in the algorithms as well as the preprocessing 
