@@ -14,19 +14,19 @@ Now once the files are pickle it is necessary to install three libraries: numpy,
 
 Finally run the following commands to execute the programs
 
-  1) Logistic Regression
+1)Logistic Regression
       
         python regression.py
   
-  2) Feedforward Neural Net
+2)Feedforward Neural Net
   
         python ff.py
   
-  3) CNN: 4 conv/pool layers
+3)CNN: 4 conv/pool layers
   
         python CNN1.py
    
-  4) GoogLeNet
+4)GoogLeNet
       
         python gnet.py
       
